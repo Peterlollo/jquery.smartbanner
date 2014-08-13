@@ -6,6 +6,7 @@
   "authors": [
     "Arnold Daniels <arnold@jasny.net>"
   ],
+  "ignore": [],
   "description": "Smart Banner support for iOS and Android",
   "keywords": [
     "jquery",

@@ -8,6 +8,8 @@
         this.origHtmlMargin = parseFloat($('html').css('margin-top')) // Get the original margin-top of the HTML element so we can take that into account
         this.options = $.extend({}, $.smartbanner.defaults, options)
 
+        var isCordovaApp = !!window.cordova;
+
         var standalone = navigator.standalone // Check if it's already a standalone web app or running within a webui view of an app (not mobile safari)
           , UA = navigator.userAgent
 
@@ -27,7 +29,7 @@
         }
 
         // Don't show banner if device isn't iOS or Android, website is loaded in app or user dismissed banner
-        if (!this.type || standalone || this.getCookie('sb-closed') || this.getCookie('sb-installed')) {
+        if (!this.type || standalone || isCordovaApp || this.getCookie('sb-closed') || this.getCookie('sb-installed')) {
             return
         }
 

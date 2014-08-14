@@ -50,6 +50,9 @@
         } else {
             this.appId = /app-id=([^\s,]+)/.exec(meta.attr('content'))[1]
         }
+        this.scheme = /app-argument=([^\s(.*?):]+)/.exec(meta.attr('content'))[1];
+        this.path = /app-argument=[a-z]+:\/\/(.*)/.exec(meta.attr('content'))[1]
+
 
         this.title = this.options.title ? this.options.title : meta.data('title') || $('title').text().replace(/\s*[|\-·].*$/, '')
         this.author = this.options.author ? this.options.author : meta.data('author') || ($('meta[name="author"]').length ? $('meta[name="author"]').attr('content') : window.location.hostname)
@@ -76,7 +79,8 @@
               link = this.options.url
             else {
               if(this.type=='android') {
-                link = 'market://details?id=' + this.appId
+                //usage of https://developer.chrome.com/multidevice/android/intents. It will launch the app if installed, otherwise, android market
+                link = "intent://"+this.path+"/#Intent;scheme="+this.scheme+";package="+this.appId+";end"
                 if(this.options.GooglePlayParams)
                   link = link + '&referrer=' + this.options.GooglePlayParams
               }
@@ -183,9 +187,9 @@
         }
 
       , install: function(e) {
-			if (this.options.hideOnInstall) {
-				this.hide()
-			}
+            if (this.options.hideOnInstall) {
+                this.hide()
+            }
             this.setCookie('sb-installed','true',this.options.daysReminder)
         }
 

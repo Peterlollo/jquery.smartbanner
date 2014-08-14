@@ -4,7 +4,7 @@
     "jquery.smartbanner.js",
     "jquery.smartbanner.css"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://github.com/florentvaldelievre/jquery.smartbanner",
   "authors": [
     "Arnold Daniels <arnold@jasny.net>"
